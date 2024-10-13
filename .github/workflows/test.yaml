@@ -4,29 +4,22 @@ on:
     workflow_dispatch:
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Dev Containers CLI
-        run: npm install -g @devcontainers/cli
-        
-      - name: Build and Start Dev Container
+      - name: Install prerequisites
         run: |
-          devcontainer up --workspace-folder .
+          sudo apt-get update
+          sudo apt-get install -y wget unzip jq
 
-      - name: Run setup commands in Dev Container
-        run: |
-          devcontainer exec --workspace-folder . bash -c "wget $(curl -s https://api.github.com/repos/vxcontrol/xp-kbt/releases/latest | jq -r '.assets[] | select(.name | contains(\"debian\")).browser_download_url') -O /home/vscode/xp-kbt.zip && unzip -o /home/vscode/xp-kbt.zip -d /home/vscode/xp-kbt"
+      - name: Create directory for xp-kbt
+        run: mkdir -p /home/runner/xp-kbt
 
-      - name: Test Dev Container Setup
+      - name: Download and extract xp-kbt
         run: |
-          devcontainer exec --workspace-folder . ls /home/vscode/xp-kbtt
+          wget $(curl -s https://api.github.com/repos/vxcontrol/xp-kbt/releases/latest | jq -r '.assets[] | select(.name | contains("debian")).browser_download_url') -O /home/runner/xp-kbt.zip
+          unzip -o /home/runner/xp-kbt.zip -d /home/runner/xp-kbt
