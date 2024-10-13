@@ -6,26 +6,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Dev Container
-      uses: devcontainers/ci@v0.3
-
-    - name: Start Dev Container
-      run: |
-        docker run --name xp-container -d mcr.microsoft.com/devcontainers/base:bullseye
-
-    - name: Install and Setup XP Environment
-      run: |
-        docker exec xp-container bash -c "wget $(curl -s https://api.github.com/repos/vxcontrol/xp-kbt/releases/latest | jq -r '.assets[] | select(.name | contains(\"debian\")).browser_download_url') -O /home/vscode/xp-kbt.zip && unzip -o /home/vscode/xp-kbt.zip -d /home/vscode/xp-kbt"
-
-    - name: Install Dependencies
-      run: |
-        docker exec xp-container bash -c "python3 -m venv /home/vscode/venv && source /home/vscode/venv/bin/activate && pip install -r requirements.txt"
-
-    - name: Run Tests
-      run: |
-        docker exec xp-container bash -c "source /home/vscode/venv/bin/activate && pytest"
+        - name: Checkout repository
+          uses: actions/checkout@v3
+    
+        - name: Set up Dev Container
+          uses: devcontainers/ci@v0.3
+    
+        - name: Start Dev Container
+          run: |
+            docker run --name xp-container -d mcr.microsoft.com/devcontainers/base:bullseye sleep infinity
+    
+        - name: Fetch latest XP-KBT Debian release URL
+          id: fetch_url
+          run: |
+            XP_KBT_URL=$(curl -s https://api.github.com/repos/vxcontrol/xp-kbt/releases/latest | jq -r '.assets[] | select(.name | contains("debian")).browser_download_url')
+            echo "::set-output name=download_url::$XP_KBT_URL"
+    
+        - name: Download and unzip XP-KBT
+          run: |
+            docker exec xp-container bash -c "wget ${{ steps.fetch_url.outputs.download_url }} -O /home/vscode/xp-kbt.zip && unzip -o /home/vscode/xp-kbt.zip -d /home/vscode/xp-kbt"
+    
+        - name: Install Dependencies
+          run: |
+            docker exec xp-container bash -c "python3 -m venv /home/vscode/venv && source /home/vscode/venv/bin/activate && pip install -r requirements.txt"
+    
+        - name: Run Tests
+          run: |
+            docker exec xp-container bash -c "source /home/vscode/venv/bin/activate && pytest"
