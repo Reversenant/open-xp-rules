@@ -34,8 +34,12 @@ jobs:
 
     - name: List files in extracted directory
       run: |
-        ls -l /home/runner/xp-kbt
-
+        ls -l /home/runner/xp-kbt 
+             
+    - name: Create required directories
+      run: |
+        mkdir -p /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages
+          
     - name: Corr rule test
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
