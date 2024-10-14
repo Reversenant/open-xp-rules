@@ -34,4 +34,4 @@ jobs:
 
     - name: List files in extracted directory
       run: |
-        ls -l \knowledgebase\contracts\taxonomy
+        ls -l home/runner/xp-kbt
