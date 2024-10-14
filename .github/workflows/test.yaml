@@ -34,4 +34,8 @@ jobs:
 
     - name: List files in extracted directory
       run: |
-        ls -l home/runner
+        ls -l /home/runner/xp-kbt
+
+    - name: Corr rule test
+      run: |
+        /home/runner/xp-kbtextra-tools/siemj/siemj.exe -c siemj.conf main
