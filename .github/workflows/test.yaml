@@ -32,6 +32,14 @@ jobs:
         mkdir -p /home/runner/xp-kbt
         tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
 
+    - name: List files in extracted directory
+      run: |
+        ls -l /home/runner/xp-kbt
+
+    - name: Set executable permissions for kbt
+      run: |
+        chmod +x /home/runner/xp-kbt/bin/kbt
+
     - name: Verify xp-kbt setup
       run: |
         /home/runner/xp-kbt/bin/kbt --version
