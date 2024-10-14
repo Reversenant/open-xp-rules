@@ -34,4 +34,4 @@ jobs:
 
     - name: List files in extracted directory
       run: |
-        ls -l packages
+        ls -l \knowledgebase\contracts\taxonomy
