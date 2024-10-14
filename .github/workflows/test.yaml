@@ -1,25 +1,37 @@
 name: Dev Container Build and Test
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Install prerequisites
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip jq
+    - name: Set up Dev Container
+      uses: devcontainers/ci@v0.3
+      with:
+        configFile: .devcontainer/devcontainer.json
 
-      - name: Create directory for xp-kbt
-        run: mkdir -p /home/runner/xp-kbt
+    - name: Set up environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget tar
 
-      - name: Download and extract xp-kbt
-        run: |
-          wget $(curl -s https://api.github.com/repos/vxcontrol/xp-kbt/releases/latest | jq -r '.assets[] | select(.name | contains("debian")).browser_download_url') -O /home/runner/xp-kbt.zip
-          unzip -o /home/runner/xp-kbt.zip -d /home/runner/xp-kbt
+    - name: Download xp-kbt archive
+      run: |
+        KBT_VERSION="27.0.78"
+        KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz"
+        wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
+
+    - name: Extract xp-kbt
+      run: |
+        mkdir -p /home/runner/xp-kbt
+        tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
+
+    - name: Verify xp-kbt setup
+      run: |
+        /home/runner/xp-kbt/bin/kbt --version
