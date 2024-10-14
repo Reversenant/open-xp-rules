@@ -34,4 +34,4 @@ jobs:
 
     - name: List files in extracted directory
       run: |
-        ls -l
+        ls -l /packages
