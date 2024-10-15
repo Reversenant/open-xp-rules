@@ -38,4 +38,4 @@ jobs:
         
     - name: Corr rule test
       run: |
-        /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj2.conf main
+        /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
