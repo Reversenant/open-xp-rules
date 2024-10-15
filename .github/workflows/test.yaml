@@ -32,6 +32,10 @@ jobs:
         mkdir -p /home/runner/xp-kbt
         tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
 
+    - name: Create required directories
+      run: |
+        mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
+
     - name: List files in extracted directory
       run: |
         ls -l /home/runner/xp-kbt 
