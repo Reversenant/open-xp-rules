@@ -35,7 +35,8 @@ jobs:
     - name: List files in extracted directory
       run: |
         ls -l /home/runner/xp-kbt 
-          
+        cat ${GITHUB_WORKSPACE}  
+
     - name: Corr rule test
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
