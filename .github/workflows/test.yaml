@@ -35,15 +35,6 @@ jobs:
     - name: List files in extracted directory
       run: |
         ls -l /home/runner/xp-kbt 
-             
-    - name: Create required directories
-      run: |
-        mkdir -p /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages
-        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/formulas_graph.json
-        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/enrules_graph.json
-        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/corrules_graph.json
-        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/aggfilters.json
-        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/correlation_defaults.json
         
     - name: Corr rule test
       run: |
