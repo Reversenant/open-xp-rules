@@ -35,7 +35,7 @@ jobs:
     - name: List files in extracted directory
       run: |
         ls -l /home/runner/xp-kbt 
-        ls ${GITHUB_WORKSPACE}  
+        echo ${GITHUB_WORKSPACE}  
 
     - name: Corr rule test
       run: |
