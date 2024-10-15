@@ -39,7 +39,8 @@ jobs:
     - name: Create required directories
       run: |
         mkdir -p /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages
-          
+        touch /home/runner/xp-kbt/Temp/eXtractionAndProcessing/output/packages/formulas_graph.json
+        
     - name: Corr rule test
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
