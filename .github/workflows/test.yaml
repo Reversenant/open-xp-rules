@@ -34,7 +34,7 @@ jobs:
 
     - name: Create required directories
       run: |
-        mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
+        mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages/open_vulnerabilities
 
     - name: List files in extracted directory
       run: |
