@@ -65,7 +65,7 @@ rule Create_local_account: Create_user_winevent or Create_user_registry
     }
 
     on Create_user_registry {
-         $action = action
+        $action = action
         $status = status
 
         $subject.account.id = subject.account.id
@@ -112,7 +112,7 @@ emit {
     $correlation_type = "incident"
     $importance = "info"
 
-    $subject = $subject
+    $subject = "process"
     $action = "create"
     $object = "account"
     $status = "success"
