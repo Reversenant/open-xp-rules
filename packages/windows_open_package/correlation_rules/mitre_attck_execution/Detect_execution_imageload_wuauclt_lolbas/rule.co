@@ -52,6 +52,10 @@ rule Detect_execution_imageload_wuauclt_lolbas: Process_Creation or Image_Load
         $object.process.path = object.process.path
         $object.process.fullpath = object.process.fullpath
         $object.process.hash = object.process.hash
+        $object.process.hash.md5 = object.process.hash.md5
+        $object.process.hash.sha1 = object.process.hash.sha1
+        $object.process.hash.sha256 = object.process.hash.sha256
+        $object.process.hash.imphash = object.process.hash.imphash
         $object.process.version = object.process.version
         $object.process.cmdline = object.process.cmdline
         $object.process.guid = object.process.guid
@@ -110,6 +114,10 @@ rule Detect_execution_imageload_wuauclt_lolbas: Process_Creation or Image_Load
         $object.process.path = object.process.path
         $object.process.fullpath = object.process.fullpath
         $object.process.hash = object.process.hash
+        $object.process.hash.md5 = object.process.hash.md5
+        $object.process.hash.sha1 = object.process.hash.sha1
+        $object.process.hash.sha256 = object.process.hash.sha256
+        $object.process.hash.imphash = object.process.hash.imphash
         $object.process.version = object.process.version
         $object.process.cmdline = object.process.cmdline
         $object.process.guid = object.process.guid
