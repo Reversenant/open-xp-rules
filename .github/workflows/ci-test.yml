@@ -45,21 +45,11 @@ jobs:
       run: |
         ls -l /home/runner/xp-kbt
         echo ${GITHUB_WORKSPACE}
-
-    - name: Verify siemj file exists
-      run: |
-        ls -l /home/runner/xp-kbt/extra-tools/siemj/
     
-
     - name: Set ownership to root
       run: |
         sudo chmod -R 777 /home/runner/xp-kbt
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
     - name: Corr rule test
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
