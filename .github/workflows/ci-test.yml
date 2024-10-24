@@ -18,7 +18,8 @@ jobs:
 
     - name: Set up environment
       run: |
-        sudo apt-get update && sudo apt-get install -y wget tar
+        sudo apt-get update
+        sudo apt-get install -y wget tar
 
     - name: Cache xp-kbt archive
       uses: actions/cache@v3
@@ -33,17 +34,26 @@ jobs:
         KBT_VERSION="27.0.78"
         KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz"
         mkdir -p /home/runner/xp-kbt
-        wget -q $KBT_URL -O - | sudo tar --no-same-owner -xz -C /home/runner/xp-kbt || exit 1
+        wget -q $KBT_URL -O - | sudo tar --no-same-owner -xz -C /home/runner/xp-kbt
 
     - name: Create required directories
       run: |
         mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
 
-    - name: List files in extracted directory
-      run: |
-        ls -l /home/runner/xp-kbt
-        echo ${GITHUB_WORKSPACE}
-
     - name: Corr rule test with better logs
       run: |
-        /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
+        mkdir -p logs
+        /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main > logs/test_output.log 2>&1
+
+    - name: Count warnings and errors
+      run: |
+        warnings=$(grep -i "warning" logs/test_output.log | wc -l)
+        errors=$(grep -i "error" logs/test_output.log | wc -l)
+        echo "Total warnings: $warnings"
+        echo "Total errors: $errors"
+
+    - name: Upload logs to GitHub artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-logs
+        path: logs/test_output.log
