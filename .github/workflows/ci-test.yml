@@ -1,10 +1,10 @@
-name: Dev Container Build and Test
+name: Dev Container Build and Test 2
 
 on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,24 +18,22 @@ jobs:
 
     - name: Set up environment
       run: |
-        sudo apt-get update
-        sudo apt-get install -y wget tar
+        sudo apt-get update && sudo apt-get install -y wget tar
 
-  build:
-    runs-on: ubuntu-latest
-    needs: setup
+    - name: Cache xp-kbt archive
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/xp-kbt
+        key: ${{ runner.os }}-xp-kbt-${{ hashFiles('xp-kbt.tar.gz') }}
+        restore-keys: |
+          ${{ runner.os }}-xp-kbt-
 
-    steps:
-    - name: Download xp-kbt archive
+    - name: Download and Extract xp-kbt
       run: |
         KBT_VERSION="27.0.78"
         KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz"
-        wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
-
-    - name: Extract xp-kbt
-      run: |
         mkdir -p /home/runner/xp-kbt
-        tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
+        wget -q $KBT_URL -O - | sudo tar --no-same-owner -xz -C /home/runner/xp-kbt || exit 1
 
     - name: Create required directories
       run: |
@@ -45,11 +43,7 @@ jobs:
       run: |
         ls -l /home/runner/xp-kbt
         echo ${GITHUB_WORKSPACE}
-    
-    - name: Set ownership to root
-      run: |
-        sudo chmod -R 777 /home/runner/xp-kbt
 
-    - name: Corr rule test
+    - name: Corr rule test with better logs
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c siemj.conf main
