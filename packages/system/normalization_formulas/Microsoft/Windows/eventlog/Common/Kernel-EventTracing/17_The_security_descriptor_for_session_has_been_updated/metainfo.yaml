@@ -1,5 +1,5 @@
 EventDescriptions:
-    - Criteria: id = "Microsoft_Windows_eventlog_Common_EventTracing_17_The security_descriptor_for_session_has_been_updated"
+    - Criteria: id = "Microsoft_Windows_eventlog_Common_EventTracing_17_The_security_descriptor_for_session_has_been_updated"
       LocalizationId: LOC_Microsoft_Title_eventlog_event_name_17
 ExpertContext:
     Created: 02.05.2024

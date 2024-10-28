@@ -34,4 +34,4 @@ else
 endif
 event_src.category = "Operating system"
 
-id = "Microsoft_Windows_eventlog_Common_EventTracing_17_The security_descriptor_for_session_has_been_updated"
+id = "Microsoft_Windows_eventlog_Common_EventTracing_17_The_security_descriptor_for_session_has_been_updated"
