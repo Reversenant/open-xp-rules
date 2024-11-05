@@ -1,67 +1,45 @@
-name: CI/CD Pipeline
+name: IT
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - 'common/**'
+      - 'packages/**'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'common/**'
+      - 'packages/**'
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Super Linter
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_YAML: true
-
   integration_tests:
-    needs: lint
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget tar
+    - name: Update package list and install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget tar
 
-      - name: Download and extract xp-kbt
-        run: |
-          KBT_VERSION="27.0.78"
-          wget https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz -O /home/runner/xp-kbt.tar.gz
-          mkdir -p /home/runner/xp-kbt && tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
+    - name: Download xp-kbt archive
+      run: |
+        KBT_VERSION="27.0.78"
+        KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz"
+        wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
 
-      - name: Prepare environment
-        run: mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
+    - name: Extract xp-kbt archive
+      run: |
+        mkdir -p /home/runner/xp-kbt
+        tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
 
-      - name: Run integration tests
-        run: /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/workflows/siemj.conf main
+    - name: Create required directories
+      run: |
+        mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: /home/runner/temp/eXtractionAndProcessing/output/packages
-
-  release:
-    needs: integration_tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Semantic Release
-        run: npm install -g semantic-release
-
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+    - name: Run tests
+      run: |
+        /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/workflows/siemj.conf main
