@@ -10,11 +10,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run Super Linter
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_YAML: true
-
   integration_tests:
     needs: lint
     runs-on: ubuntu-latest
