@@ -39,3 +39,15 @@ jobs:
       run: |
         chmod +x ./scripts/cleanup.sh
         ./scripts/cleanup.sh $GITHUB_WORKSPACE
+
+    - name: Install .NET SDK
+      run: |
+        sudo apt-get install -y dotnet-sdk-6.0
+
+    - name: Create new release using kbtpack.dll
+      run: |
+        dotnet $GITHUB_WORKSPACE/extra-tools/kbpack/kbpack.dll
+
+    - name: List files after running kbtpack.dll
+      run: |
+        ls -la $GITHUB_WORKSPACE/extra-tools/kbpack
