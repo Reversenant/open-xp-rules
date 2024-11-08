@@ -44,7 +44,7 @@ jobs:
         ls -la /home/runner/xp-kbt
         dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.01.zip
 
-    - name: Upload pack.01.zip as artifact
+    - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: pack-01-zip
