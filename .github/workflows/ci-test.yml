@@ -49,7 +49,7 @@ jobs:
         ls -la /home/runner/xp-kbt
         echo "!!!"
         ls -la /home/runner/xp-kbt/temp/eXtractionAndProcessing/output
-        dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/out
+        dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/
 
     - name: List files after running kbtpack.dll
       run: |
