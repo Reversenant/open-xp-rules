@@ -46,9 +46,9 @@ jobs:
 
     - name: Create new release using kbtpack.dll
       run: |
-        ls -la $GITHUB_WORKSPAC
-        dotnet $GITHUB_WORKSPACE/extra-tools/kbpack/kbpack.dll
+        ls -la /home/runner/xp-kbt
+        dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll
 
     - name: List files after running kbtpack.dll
       run: |
-        ls -la $GITHUB_WORKSPACE/extra-tools/kbpack
+        ls -la /home/runner/xp-kbt/extra-tools/kbpack
