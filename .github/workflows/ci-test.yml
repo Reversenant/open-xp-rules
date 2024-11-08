@@ -51,7 +51,7 @@ jobs:
         ls -la /home/runner/xp-kbt/temp/eXtractionAndProcessing/output
         dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/out
         echo "!!!!!!"
-        ls -la /home/runner/temp/eXtractionAndProcessing/output/packages/out
+        ls -la /home/runner/temp/eXtractionAndProcessing/output/packages/out/
     - name: List files after running kbtpack.dll
       run: |
         ls -la /home/runner/temp/eXtractionAndProcessing/output/packages
