@@ -34,3 +34,8 @@ jobs:
     - name: Run tests
       run: |
         /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/workflows/siemj.conf main
+
+    - name: Run cleanup script
+      run: |
+        chmod +x ./scripts/cleanup.sh
+        ./scripts/cleanup.sh $GITHUB_WORKSPACE
