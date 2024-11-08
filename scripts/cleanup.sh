@@ -6,7 +6,7 @@ find "$repo_dir" -type f -name "metainfo.yaml" | while read -r file; do
   if ! grep -q 'ObjectId: PT' "$file"; then
     echo "Deleting folder: $(dirname "$file")"
     rm -rf "$(dirname "$file")"
-  if ! grep -q 'ObjectId: SEC-RF-183193309' "$file"; then
+  if ! grep -q 'ObjectId: SEC-RF-126634467' "$file"; then
     echo "Deleting folder: $(dirname "$file")"
     rm -rf "$(dirname "$file")"
   fi
