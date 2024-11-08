@@ -42,10 +42,10 @@ jobs:
     - name: Create new release using kbtpack.dll
       run: |
         ls -la /home/runner/xp-kbt
-        dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.01
+        dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.02.zip
 
     - name: Upload pack.01.zip as artifact
       uses: actions/upload-artifact@v3
       with:
         name: pack-01-zip
-        path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.01
+        path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.02.zip
