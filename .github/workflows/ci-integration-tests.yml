@@ -1,16 +1,7 @@
 name: Integration tests
 
 on:
-  push:
-    paths:
-      - 'common/**'
-      - 'packages/**'
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 'common/**'
-      - 'packages/**'
+  workflow_dispatch:
 
 jobs:
   integration_tests:
