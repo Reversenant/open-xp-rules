@@ -10,5 +10,4 @@ filter Network_connections_windows_not_lan() {
 		)
 
 	and direction == "egress"
-
 }
