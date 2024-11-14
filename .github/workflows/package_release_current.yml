@@ -1,0 +1,71 @@
+name: Release - Current Version
+
+on:
+    workflow_dispatch:
+
+jobs:
+    setup:
+        name: Setup Current Version
+        uses: ./.github/workflows/setup_kbt.yml
+        with:
+            kbt_version: "27.0.78"
+
+    test:
+        name: Test Current Version
+        runs-on: ubuntu-latest
+        needs: setup
+        steps:
+          - name: Run Tests
+            run: |
+                /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/workflows/siemj.conf main
+
+    package_full:
+        name: Package Full - Current Version
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+          - name: Pack Full Content
+            run: |
+                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
+
+    package_open:
+        name: Package Open - Current Version
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+          - name: Filter System Content
+            run: ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
+
+          - name: Pack Open Content
+            run: |
+                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
+
+    release:
+        name: Release Packages - Current Version
+        runs-on: ubuntu-latest
+        needs: [package_full, package_open]
+        steps:
+          - name: Create Release
+            id: create-release
+            uses: actions/create-release@v1
+            with:
+                tag_name: "v27.0.78"
+                release_name: "KBT Current Version Releases"
+                draft: false
+                prerelease: false
+
+          - name: Upload Full Current Package
+            uses: actions/upload-release-asset@v1
+            with:
+                upload_url: ${{ steps.create-release.outputs.upload_url }}
+                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
+                asset_name: pack.full.current.kb
+                asset_content_type: application/octet-stream
+
+          - name: Upload Open Current Package
+            uses: actions/upload-release-asset@v1
+            with:
+                upload_url: ${{ steps.create-release.outputs.upload_url }}
+                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
+                asset_name: pack.open.current.kb
+                asset_content_type: application/octet-stream
