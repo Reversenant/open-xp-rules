@@ -1,7 +1,7 @@
 Filter:
     Name:
-        ru: 'Проверка, что событие является нормализованным2'
-        en: 'Check if event normalized2'
+        ru: ''
+        en: 'Network_connections_windows_not_lan'
     Description: {}
     UseAsEventName: true
 Args: {}
