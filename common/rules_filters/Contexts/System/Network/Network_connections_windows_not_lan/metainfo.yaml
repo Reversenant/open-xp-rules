@@ -1,6 +1,6 @@
 Filter:
     Name:
-        ru: ''
+        ru: 'Сети без lan'
         en: 'Network_connections_windows_not_lan'
     Description: {}
     UseAsEventName: true

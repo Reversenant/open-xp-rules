@@ -1,6 +1,6 @@
 Filter:
     Name:
-        ru: ''
+        ru: 'Сети'
         en: 'Network_connections_windows'
     Description: {}
     UseAsEventName: true
