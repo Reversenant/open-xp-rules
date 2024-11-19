@@ -17,27 +17,13 @@ jobs:
         steps:
           - name: Checkout code
             uses: actions/checkout@v3
-    
-          - name: Update package list and install dependencies
-            run: |
-                sudo apt-get update
-                sudo apt-get install -y wget tar
-
-          - name: Download xp-kbt archive
-            run: |
-                KBT_VERSION="27.0.78"
-                KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${KBT_VERSION}/kbt.${KBT_VERSION}-linux.tar.gz"
-                wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
-          
-          - name: Extract xp-kbt archive
-            run: |
-                mkdir -p /home/runner/xp-kbt
-                tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
-          
-          - name: Create required directories
-            run: |
-                mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
             
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: /home/runner/xp-kbt
+                key: setup-kbt-stable
+
           - name: Run Tests
             run: |
                 /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/config/siemj.conf main
@@ -47,6 +33,12 @@ jobs:
         runs-on: ubuntu-latest
         needs: test
         steps:
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: /home/runner
+                key: setup-kbt-stable
+
           - name: Pack Full Content
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
@@ -56,6 +48,12 @@ jobs:
         runs-on: ubuntu-latest
         needs: test
         steps:
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: /home/runner
+                key: setup-kbt-stable
+
           - name: Filter System Content
             run: ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
 
@@ -68,6 +66,12 @@ jobs:
         runs-on: ubuntu-latest
         needs: [package_full, package_open]
         steps:
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: /home/runner
+                key: setup-kbt-stable
+          
           - name: Create Release
             id: create-release
             uses: actions/create-release@v1
