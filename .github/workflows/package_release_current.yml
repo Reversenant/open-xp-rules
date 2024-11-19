@@ -21,7 +21,7 @@ jobs:
           - name: Restore Cache
             uses: actions/cache@v3
             with:
-                path: /home/runner/xp-kbt
+                path: /home/runner
                 key: setup-kbt-stable
 
           - name: Run Tests
