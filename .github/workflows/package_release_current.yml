@@ -1,4 +1,4 @@
-name: Release - Current Version
+name: Release Current Version
 
 on:
     workflow_dispatch:
