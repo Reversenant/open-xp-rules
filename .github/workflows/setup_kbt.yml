@@ -1,0 +1,27 @@
+name: Setup xp-kbt
+
+on:
+    workflow_call:
+        inputs:
+            kbt_version:
+                required: true
+                type: string
+
+jobs:
+    setup_kbt:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Install dependencies
+            run: |
+                sudo apt-get update
+                sudo apt-get install -y wget tar dotnet-sdk-6.0
+
+          - name: Download KBT
+            run: |
+                KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${{ inputs.kbt_version }}/kbt.${{ inputs.kbt_version }}-linux.tar.gz"
+                wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
+
+          - name: Extract KBT
+            run: |
+                mkdir -p /home/runner/xp-kbt
+                tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt

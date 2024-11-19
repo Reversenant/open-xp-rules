@@ -2,14 +2,6 @@ name: Release Current Version
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'common/**'
-      - 'packages/**'
-  pull_request:
-    paths:
-      - 'common/**'
-      - 'packages/**'
 
 jobs:
     setup:

@@ -1,0 +1,71 @@
+name: Release Previous Version
+
+on:
+  workflow_dispatch:
+
+jobs:
+    setup:
+        name: Setup Previous Version
+        uses: ./.github/workflows/setup_kbt.yml
+        with:
+            kbt_version: "26.2.4391"
+
+    test:
+        name: Test Previous Version
+        runs-on: ubuntu-latest
+        needs: setup
+        steps:
+          - name: Run Tests
+            run: |
+                /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/config/siemj.conf main
+
+    package_full:
+        name: Package Full - Previous Version
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+          - name: Pack Full Content
+            run: |
+                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.previous.kb
+
+    package_open:
+        name: Package Open - Previous Version
+        runs-on: ubuntu-latest
+        needs: package_full
+        steps:
+          - name: Filter System Content
+            run: ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
+
+          - name: Pack Open Content
+            run: |
+                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.previous.kb
+
+    release:
+        name: Release Packages - Previous Version
+        runs-on: ubuntu-latest
+        needs: [package_full, package_open]
+        steps:
+          - name: Create Release
+            id: create-release
+            uses: actions/create-release@v1
+            with:
+                tag_name: "v26.2.4391"
+                release_name: "KBT Previous Version Releases"
+                draft: false
+                prerelease: false
+
+          - name: Upload Full Previous Package
+            uses: actions/upload-release-asset@v1
+            with:
+                upload_url: ${{ steps.create-release.outputs.upload_url }}
+                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.previous.kb
+                asset_name: pack.full.previous.kb
+                asset_content_type: application/octet-stream
+
+          - name: Upload Open Previous Package
+            uses: actions/upload-release-asset@v1
+            with:
+                upload_url: ${{ steps.create-release.outputs.upload_url }}
+                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.previous.kb
+                asset_name: pack.open.previous.kb
+                asset_content_type: application/octet-stream
