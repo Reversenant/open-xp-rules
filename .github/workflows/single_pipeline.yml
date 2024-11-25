@@ -21,10 +21,10 @@ jobs:
 
       - name: Download KBT - Previous Version
         run: |
-          KBT_URL="https://github.com/vxcontrol/xp-kbt/archive/refs/tags/26.2.4391.tar.gz"
-          wget $KBT_URL -O /home/runner/xp-kbt-previoutar.gzs.
+          KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/26.2.4391/kbt.26.2.4391-debian-10.zip"
+          wget $KBT_URL -O /home/runner/xp-kbt-previous.zip
           mkdir -p /home/runner/xp-kbt-previous
-          tar -xzvf /home/runner/xp-kbt-previous.tar.gz -C /home/runner/xp-kbt-previous
+          unzip /home/runner/xp-kbt-previous.zip -d /home/runner/xp-kbt-previous
 
       - name: Create required directories
         run: mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
