@@ -1,0 +1,62 @@
+name: Single Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget tar dotnet-sdk-8.0
+
+      - name: Download KBT - Current Version
+        run: |
+          KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/27.0.78/kbt.27.0.78-linux.tar.gz"
+          wget $KBT_URL -O /home/runner/xp-kbt-current.tar.gz
+          mkdir -p /home/runner/xp-kbt-current
+          tar -xzvf /home/runner/xp-kbt-current.tar.gz -C /home/runner/xp-kbt-current
+
+      - name: Download KBT - Previous Version
+        run: |
+          KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/26.2.4391/kbt.26.2.4391-linux.tar.gz"
+          wget $KBT_URL -O /home/runner/xp-kbt-previous.tar.gz
+          mkdir -p /home/runner/xp-kbt-previous
+          tar -xzvf /home/runner/xp-kbt-previous.tar.gz -C /home/runner/xp-kbt-previous
+
+      - name: Create required directories
+        run: mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
+
+      - name: Test Current Version
+        run: |
+          /home/runner/xp-kbt-current/extra-tools/siemj/siemj -c .github/config/siemj.conf main
+
+      - name: Test Previous Version
+        run: |
+          /home/runner/xp-kbt-previous/extra-tools/siemj/siemj -c .github/config/siemj.conf main
+        
+      - name: Package Full - Current Version
+        run: |
+          dotnet /home/runner/xp-kbt-current/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
+
+      - name: Package Open - Current Version
+        run: |
+          chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
+          dotnet /home/runner/xp-kbt-current/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
+
+      - name: Package Full - Previous Version
+        run: |
+          dotnet /home/runner/xp-kbt-previous/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.previous.kb
+
+      - name: Package Open - Previous Version
+        run: |
+          chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
+          dotnet /home/runner/xp-kbt-previous/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.previous.kb
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: /home/runner/temp/eXtractionAndProcessing/output/packages/
