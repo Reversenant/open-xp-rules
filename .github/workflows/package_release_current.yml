@@ -3,9 +3,6 @@ name: Release Current Version
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
     setup:
         name: Setup Current Version
@@ -92,33 +89,14 @@ jobs:
                     /home/runner/temp/eXtractionAndProcessing/output/packages
                 key: setup-kbt-stable
           
-          - name: Create Release
-            id: create-release
-            uses: actions/create-release@v1
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          - name: Upload Full Current Package as Artifact
+            uses: actions/upload-artifact@v3
             with:
-                tag_name: ${{ github.ref }}
-                release_name: "KBT Current Version Releases"
-                draft: false
-                prerelease: false
-
-          - name: Upload Full Current Package
-            uses: actions/upload-release-asset@v1
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                name: pack-full-current-kb
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
+        
+          - name: Upload Open Current Package as Artifact
+            uses: actions/upload-artifact@v3
             with:
-                upload_url: ${{ steps.create-release.outputs.upload_url }}
-                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
-                asset_name: pack.full.current.kb
-                asset_content_type: application/octet-stream
-
-          - name: Upload Open Current Package
-            uses: actions/upload-release-asset@v1
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            with:
-                upload_url: ${{ steps.create-release.outputs.upload_url }}
-                asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
-                asset_name: pack.open.current.kb
-                asset_content_type: application/octet-stream
+                name: pack-open-current-kb
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
