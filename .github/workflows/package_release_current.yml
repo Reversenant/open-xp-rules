@@ -72,7 +72,7 @@ jobs:
           - name: Pack Open Content
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
-                ls -al /home/runner/temp/eXtractionAndProcessing/output/packages/
+                ls /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
     release:
         name: Release Packages - Current Version
         runs-on: ubuntu-latest
