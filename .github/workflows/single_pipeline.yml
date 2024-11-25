@@ -21,7 +21,7 @@ jobs:
 
       - name: Download KBT - Previous Version
         run: |
-          KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/26.2.4391/kbt.26.2.4391-linux.tar.gz"
+          KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/26.2.4391/kbt.26.2.4391-debian-10.zip"
           wget $KBT_URL -O /home/runner/xp-kbt-previous.tar.gz
           mkdir -p /home/runner/xp-kbt-previous
           tar -xzvf /home/runner/xp-kbt-previous.tar.gz -C /home/runner/xp-kbt-previous
