@@ -92,6 +92,8 @@ jobs:
           - name: Create Release
             id: create-release
             uses: actions/create-release@v1
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
                 tag_name: "v27.0.78"
                 release_name: "KBT Current Version Releases"
@@ -100,6 +102,8 @@ jobs:
 
           - name: Upload Full Current Package
             uses: actions/upload-release-asset@v1
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
                 upload_url: ${{ steps.create-release.outputs.upload_url }}
                 asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
@@ -108,6 +112,8 @@ jobs:
 
           - name: Upload Open Current Package
             uses: actions/upload-release-asset@v1
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
                 upload_url: ${{ steps.create-release.outputs.upload_url }}
                 asset_path: /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
