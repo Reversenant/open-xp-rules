@@ -98,7 +98,7 @@ jobs:
             env:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
-                tag_name: "v27.0.78"
+                tag_name: ${{ github.ref }}
                 release_name: "KBT Current Version Releases"
                 draft: false
                 prerelease: false
