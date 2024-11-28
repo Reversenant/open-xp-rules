@@ -67,7 +67,7 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable
+                key: setup-kbt-stable-2
 
     # Шаг 4: Сборка открытого пакета текущей версии.
     # Выполняется фильтрация системного содержимого перед упаковкой.
@@ -103,7 +103,7 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable
+                key: setup-kbt-stable-2
                 
     # Шаг 5: Публикация пакетов.
     # Загружаются готовые пакеты в качестве артефактов.
@@ -121,7 +121,7 @@ jobs:
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
                     /home/runner/temp/eXtractionAndProcessing/output/packages/open
-                key: setup-kbt-stable
+                key: setup-kbt-stable-2
           # Для упрощения, задача с выпуском релиза репозитория заменена пока что на простую выгрузку артефакта
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
