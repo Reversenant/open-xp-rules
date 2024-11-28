@@ -67,7 +67,7 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
+                key: setup-kbt-stable
 
     # Шаг 4: Сборка открытого пакета текущей версии.
     # Выполняется фильтрация системного содержимого перед упаковкой.
