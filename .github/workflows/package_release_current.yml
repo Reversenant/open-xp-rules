@@ -20,9 +20,18 @@ jobs:
         runs-on: ubuntu-latest
         needs: setup
         steps:
-          - name: Run Tests
-            run: |
-                /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/config/siemj.conf main
+        - name: Restore Cache
+          uses: actions/cache@v3
+          with:
+              path: |
+                  /home/runner/work
+                  /home/runner/xp-kbt
+                  /home/runner/temp/eXtractionAndProcessing/output/packages
+              key: setup-kbt-stable
+          
+        - name: Run Tests
+          run: |
+              /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/config/siemj.conf main
   
     # Шаг 3: Сборка полного пакета текущей версии.
     # Выполняется упаковка всех данных в единый файл с расширением .kb.
