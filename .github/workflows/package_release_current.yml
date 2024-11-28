@@ -71,7 +71,8 @@ jobs:
           
           - name: LS
             run: |
-                chmod +x ls -la /home/runner/temp/eXtractionAndProcessing/output/packages
+                chmod +x /home/runner/temp/eXtractionAndProcessing/output/packages
+                ls -la /home/runner/temp/eXtractionAndProcessing/output/packages
 
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
