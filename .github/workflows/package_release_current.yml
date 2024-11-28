@@ -15,11 +15,19 @@ jobs:
         runs-on: ubuntu-latest
         needs: setup
         steps:
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: |
+                    /home/runner/xp-kbt
+                    /home/runner/temp/eXtractionAndProcessing/output/packages
+                key: setup-kbt-stable
+
           - name: Pack Full Content
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
 
-          - name: Restore Cache
+          - name: Restore Cache 2
             uses: actions/cache@v3
             with:
                 path: |
@@ -32,6 +40,14 @@ jobs:
         runs-on: ubuntu-latest
         needs: package_full
         steps:
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: |
+                    /home/runner/xp-kbt
+                    /home/runner/temp/eXtractionAndProcessing/output/packages
+                key: setup-kbt-stable
+
           - name: Filter System Content
             run: chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
 
@@ -39,7 +55,7 @@ jobs:
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
 
-          - name: Restore Cache
+          - name: Restore Cache 2
             uses: actions/cache@v3
             with:
                 path: |
