@@ -38,11 +38,3 @@ jobs:
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
                 key: setup-kbt-stable
-
-          - name: Cache Setup Output 2
-            uses: actions/cache@v3
-            with:
-                path: |
-                    /home/runner/xp-kbt
-                    /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2

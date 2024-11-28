@@ -15,17 +15,6 @@ jobs:
         runs-on: ubuntu-latest
         needs: setup
         steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-
-          - name: Restore Cache
-            uses: actions/cache@v3
-            with:
-                path: |
-                    /home/runner/xp-kbt
-                    /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
-
           - name: Pack Full Content
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
@@ -36,24 +25,13 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable
 
     package_open:
         name: Package Open - Current Version
         runs-on: ubuntu-latest
         needs: package_full
         steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-
-          - name: Restore Cache
-            uses: actions/cache@v3
-            with:
-                path: |
-                    /home/runner/xp-kbt
-                    /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
-
           - name: Filter System Content
             run: chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
 
@@ -61,13 +39,13 @@ jobs:
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
 
-          - name: Restore Cache 2
+          - name: Restore Cache
             uses: actions/cache@v3
             with:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable
 
     release:
         name: Release Packages - Current Version
@@ -83,20 +61,20 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable
           
           - name: LS
             run: |
-                ls -la /home/runner/temp/eXtractionAndProcessing/output/packages
+                ls /home/runner/temp/eXtractionAndProcessing/output/packages/
 
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: pack-full-current-kb
-                path: /home/runner/temp/eXtractionAndProcessing/output/packages
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages/
         
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: pack-open-current-kb
-                path: /home/runner/temp/eXtractionAndProcessing/output/packages
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages/
