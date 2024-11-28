@@ -24,7 +24,7 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable
+                key: ${{ github.run_id }}-kbt-cache
 
           - name: Pack Full Content
             run: |
@@ -44,7 +44,7 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable
+                key: ${{ github.run_id }}-kbt-cache
 
           - name: Filter System Content
             run: chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
@@ -67,11 +67,10 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable
+                key: ${{ github.run_id }}-kbt-cache
           
           - name: LS
             run: |
-                chmod +x /home/runner/temp/eXtractionAndProcessing/output/packages
                 ls -la /home/runner/temp/eXtractionAndProcessing/output/packages
 
           - name: Upload Full Current Package as Artifact
