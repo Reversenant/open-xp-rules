@@ -103,7 +103,7 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable-2
                 
     # Шаг 5: Публикация пакетов.
     # Загружаются готовые пакеты в качестве артефактов.
@@ -112,7 +112,7 @@ jobs:
         runs-on: ubuntu-latest
         needs: [package_full, package_open]
         steps:
-          # Cначала восстанавливаем кеш с файлами полного контента
+          # Cначала восстанавливаем кеш с файлами для контента
           - name: Restore Cache
             uses: actions/cache@v3
             with:
@@ -127,16 +127,6 @@ jobs:
             with:
                 name: packages-full
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
-
-          # Потом восстанавливаем кеш с файлами открытого контента
-          - name: Restore Cache 2
-            uses: actions/cache@v3
-            with:
-                path: |
-                    /home/runner/work
-                    /home/runner/xp-kbt
-                    /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
 
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
