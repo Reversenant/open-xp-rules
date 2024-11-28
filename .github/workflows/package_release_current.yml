@@ -67,7 +67,7 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable-2
 
     # Шаг 4: Сборка открытого пакета текущей версии.
     # Выполняется фильтрация системного содержимого перед упаковкой.
@@ -93,9 +93,8 @@ jobs:
 
           - name: Pack Open Content
             run: |
-                rm -r /home/runner/temp/eXtractionAndProcessing/output/packages
-                mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
-                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
+                mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages/open
+                dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/open/pack.open.current.kb
           
             # Повторное сохранение данных в кеш после упаковки пакета (для того, чтобы новые файлы попали в кеш для дальнейших шагов).
           - name: Restore Cache 2
@@ -104,7 +103,7 @@ jobs:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-4
+                key: setup-kbt-stable-3
                 
     # Шаг 5: Публикация пакетов.
     # Загружаются готовые пакеты в качестве артефактов.
@@ -121,7 +120,7 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-3
+                key: setup-kbt-stable-2
           # Для упрощения, задача с выпуском релиза репозитория заменена пока что на простую выгрузку артефакта
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
@@ -130,17 +129,17 @@ jobs:
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
 
           # Потом восстанавливаем кеш с файлами открытого контента
-          - name: Restore Cache
+          - name: Restore Cache 2
             uses: actions/cache@v3
             with:
                 path: |
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-4
+                key: setup-kbt-stable-3
 
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: packages-open
-                path: /home/runner/temp/eXtractionAndProcessing/output/packages/
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages/open/
