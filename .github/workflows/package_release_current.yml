@@ -91,17 +91,16 @@ jobs:
           
           - name: LS
             run: |
-                ls /home/runner/temp/eXtractionAndProcessing/output/
-                ls /home/runner/
+                ls /home/runner/temp/eXtractionAndProcessing/output/packages
 
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: pack-full-current-kb
-                path: /home/runner/temp/eXtractionAndProcessing/output/packages/
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages
         
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: pack-open-current-kb
-                path: /home/runner/temp/eXtractionAndProcessing/output/packages/
+                path: /home/runner/temp/eXtractionAndProcessing/output/packages
