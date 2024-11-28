@@ -124,7 +124,7 @@ jobs:
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
-                name: packages
+                name: packages-full
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
           # Потом восстанавливаем кеш с файлами открытого контента
           - name: Restore Cache
@@ -139,5 +139,5 @@ jobs:
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
-                name: packages
+                name: packages-open
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
