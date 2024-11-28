@@ -33,6 +33,12 @@ jobs:
         run: |
           dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
 
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+            name: packages-full
+            path: /home/runner/temp/eXtractionAndProcessing/output/packages/
+
       - name: Package Open - Current Version
         run: |
           chmod +x ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
@@ -41,5 +47,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: packages
+          name: packages-open
           path: /home/runner/temp/eXtractionAndProcessing/output/packages/
