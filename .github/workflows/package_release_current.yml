@@ -93,6 +93,8 @@ jobs:
 
           - name: Pack Open Content
             run: |
+                rm -r /home/runner/temp/eXtractionAndProcessing/output/packages
+                mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
           
             # Повторное сохранение данных в кеш после упаковки пакета (для того, чтобы новые файлы попали в кеш для дальнейших шагов).
@@ -126,6 +128,7 @@ jobs:
             with:
                 name: packages-full
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
+
           # Потом восстанавливаем кеш с файлами открытого контента
           - name: Restore Cache
             uses: actions/cache@v3
