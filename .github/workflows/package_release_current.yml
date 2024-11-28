@@ -1,19 +1,35 @@
 name: Release Current Version
 
+# Workflow для тестирования и сборки релиза для текущей версии xp-kbt.
+
 on:
   workflow_dispatch:
 
 jobs:
+    # Шаг 1: Настройка окружения с помощью отдельного workflow `setup_kbt.yml`.
     setup:
         name: Setup Current Version
         uses: ./.github/workflows/setup_kbt.yml
         with:
             kbt_version: "27.0.78"
 
+    # Шаг 2: Тестирование текущей версии.
+    # Выполняется запуск тестов с использованием инструмента siemj.
+    test:
+        name: Test Current Version
+        runs-on: ubuntu-latest
+        needs: setup
+        steps:
+          - name: Run Tests
+            run: |
+                /home/runner/xp-kbt/extra-tools/siemj/siemj -c .github/config/siemj.conf main
+  
+    # Шаг 3: Сборка полного пакета текущей версии.
+    # Выполняется упаковка всех данных в единый файл с расширением .kb.
     package_full:
         name: Package Full - Current Version
         runs-on: ubuntu-latest
-        needs: setup
+        needs: test
         steps:
           - name: Checkout code
             uses: actions/checkout@v3
@@ -31,6 +47,7 @@ jobs:
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.full.current.kb
 
+          # Повторное сохранение данных в кеш после упаковки пакета (для того, чтобы новые файлы попали в кеш для дальнейших шагов).
           - name: Restore Cache 2
             uses: actions/cache@v3
             with:
@@ -38,8 +55,10 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
+                key: setup-kbt-stable-3
 
+    # Шаг 4: Сборка открытого пакета текущей версии.
+    # Выполняется фильтрация системного содержимого перед упаковкой.
     package_open:
         name: Package Open - Current Version
         runs-on: ubuntu-latest
@@ -63,20 +82,24 @@ jobs:
           - name: Pack Open Content
             run: |
                 dotnet /home/runner/xp-kbt/extra-tools/kbpack/kbpack.dll pack -s $GITHUB_WORKSPACE -o /home/runner/temp/eXtractionAndProcessing/output/packages/pack.open.current.kb
-
+          
+            # Повторное сохранение данных в кеш после упаковки пакета (для того, чтобы новые файлы попали в кеш для дальнейших шагов).
           - name: Restore Cache 2
             uses: actions/cache@v3
             with:
                 path: |
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
-
+                key: setup-kbt-stable-4
+                
+    # Шаг 5: Публикация пакетов.
+    # Загружаются готовые пакеты в качестве артефактов.
     release:
         name: Release Packages - Current Version
         runs-on: ubuntu-latest
         needs: [package_full, package_open]
         steps:
+          # Cначала восстанавливаем кеш с файлами полного контента
           - name: Restore Cache
             uses: actions/cache@v3
             with:
@@ -84,18 +107,23 @@ jobs:
                     /home/runner/work
                     /home/runner/xp-kbt
                     /home/runner/temp/eXtractionAndProcessing/output/packages
-                key: setup-kbt-stable-2
-          
-          - name: LS
-            run: |
-                ls /home/runner/temp/eXtractionAndProcessing/output/packages/
-
+                key: setup-kbt-stable-3
+          # Для упрощения, задача с выпуском релиза репозитория заменена пока что на простую выгрузку артефакта
           - name: Upload Full Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: packages
                 path: /home/runner/temp/eXtractionAndProcessing/output/packages/
-        
+          # Потом восстанавливаем кеш с файлами открытого контента
+          - name: Restore Cache
+            uses: actions/cache@v3
+            with:
+                path: |
+                    /home/runner/work
+                    /home/runner/xp-kbt
+                    /home/runner/temp/eXtractionAndProcessing/output/packages
+                key: setup-kbt-stable-4
+
           - name: Upload Open Current Package as Artifact
             uses: actions/upload-artifact@v3
             with:

@@ -1,39 +1,46 @@
 name: Setup xp-kbt
 
+# Определение workflow с базовыми настройками, который будет вызываться из других workflows.
+
 on:
     workflow_call:
         inputs:
             kbt_version:
                 required: true
-                type: string
+                type: string # Версия xp-kbt, которую нужно установить.
 
 jobs:
     setup_kbt:
         runs-on: ubuntu-latest
         steps:
+          # Шаг 1: Установка необходимых зависимостей.
           - name: Install dependencies
             run: |
                 sudo apt-get update
                 sudo apt-get install -y wget tar dotnet-sdk-8.0
 
+          # Шаг 2: Клонирование кода репозитория.      
           - name: Checkout code
             uses: actions/checkout@v3
 
+          # Шаг 3: Загрузка архива xp-kbt с указанной версии. Формируем URL для загрузки архива xp-kbt указанной версии и скачиваем архив в указанное место.
           - name: Download KBT
             run: |
-                KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${{ inputs.kbt_version }}/kbt.${{ inputs.kbt_version }}-linux.tar.gz"
+                KBT_URL="https://github.com/vxcontrol/xp-kbt/releases/download/${{ inputs.kbt_version }}/kbt.${{ inputs.kbt_version }}-linux.tar.gz" 
                 wget $KBT_URL -O /home/runner/xp-kbt.tar.gz
-            continue-on-error: true
 
+          #Распаковка архива xp-kbt в созданную директорию.
           - name: Extract KBT
             run: |
                 mkdir -p /home/runner/xp-kbt
                 tar -xzvf /home/runner/xp-kbt.tar.gz -C /home/runner/xp-kbt
 
+          # Шаг 5: Создание необходимой директории для работы xp-kbt.                
           - name: Create required directories
             run: |
                 mkdir -p /home/runner/temp/eXtractionAndProcessing/output/packages
 
+          # Шаг 6: Кэширование результатов установки xp-kbt.
           - name: Cache Setup Output
             uses: actions/cache@v3
             with:
