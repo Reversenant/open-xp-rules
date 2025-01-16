@@ -17,3 +17,4 @@ filter UserAccount_Windows(string $name, string $id) {
     and regex(lower($name), "^umfd-\d{1,4}$", 0) == null
     and find_substr($name, "healthmailbox") == null
 }
+
