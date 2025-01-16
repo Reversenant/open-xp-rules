@@ -1,4 +1,4 @@
-name: Script_Extensions
+name: Script_Extensions_Open
 fields:
     - extension:
           primaryKey: true

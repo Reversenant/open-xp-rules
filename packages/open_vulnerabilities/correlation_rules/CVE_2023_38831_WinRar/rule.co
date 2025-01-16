@@ -1,4 +1,4 @@
-query CheckExtension($cmdline) from Script_Extensions {
+query CheckExtension($cmdline) from Script_Extensions_Open {
     regex_match($cmdline, column::extension)
 }
 

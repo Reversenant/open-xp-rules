@@ -1,4 +1,4 @@
-name: AD_Domain_Controllers
+name: AD_Domain_Controllers_Open
 fields:
     - complex_key:
           compositeFields:
