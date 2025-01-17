@@ -20,8 +20,8 @@ ExpertContext:
               - 4104
 ObjectId: SEC-CR-152436010
 EventDescriptions:
-    - Criteria: correlation_name = "Schtasks_Commandline"
-      LocalizationId: corrname_Schtasks_Commandline
+    - Criteria: correlation_name = "Schtasks_Commandline_Open"
+      LocalizationId: corrname_Schtasks_Commandline_Open
 ContentRelations:
     Implements:
         ATTACK:

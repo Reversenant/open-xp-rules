@@ -35,7 +35,7 @@ event Run_Schtasks_in_Powershell_Command:
         and regex(lower(object.process.cmdline), "schtasks.*?(\/|-)(create|change|run|delete|end)\\s+|\\b((register|new|set|start|stop|unregister)-scheduledtask(principal)?|registertaskdefinition)\\s+", 0) != null
     }
 
-rule Schtasks_Commandline: Run_Schtasks_in_Cmd or Run_Schtasks_in_Powershell_Pipeline or (Run_Schtasks_in_Powershell_Command+ timer 1s)
+rule Schtasks_Commandline_Open: Run_Schtasks_in_Cmd or Run_Schtasks_in_Powershell_Pipeline or (Run_Schtasks_in_Powershell_Command+ timer 1s)
 
     init {
         $first_event = true

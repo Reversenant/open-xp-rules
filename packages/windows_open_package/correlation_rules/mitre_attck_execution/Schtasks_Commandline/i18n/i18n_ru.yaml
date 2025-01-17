@@ -1,4 +1,4 @@
 Description: 'Обнаружена попытка управлять задачей по расписанию через командную строку или PowerShell'
 EventDescriptions:
-    - LocalizationId: corrname_Schtasks_Commandline
+    - LocalizationId: corrname_Schtasks_Commandline_Open
       EventDescription: 'Обнаружена попытка управлять задачей по расписанию через командную строку или PowerShell на узле {event_src.host}'
