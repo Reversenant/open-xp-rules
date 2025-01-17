@@ -1,4 +1,4 @@
 Description: 'Starting an executable file as a service instead of the original file as a result of exploiting the ability to bypass the executable file search mechanism for paths containing spaces that are not enclosed in quotes'
 EventDescriptions:
-    - LocalizationId: 'corrname_Unquoted_Service_Path_Abuse'
+    - LocalizationId: 'corrname_Unquoted_Service_Path_Abuse_Open'
       EventDescription: 'As a service on behalf of the account {object.account.domain}\{object.account.name} the file {object.process.fullpath} was started instead of the original file {object.process.cmdline}'

@@ -19,5 +19,5 @@ ContentRelations:
             defense-evasion:
                 - T1134.004
 EventDescriptions:
-    - Criteria: correlation_name = "Subrule_ParentPid_Spoofing"
-      LocalizationId: corrname_Subrule_ParentPid_Spoofing
+    - Criteria: correlation_name = "Subrule_ParentPid_Spoofing_Open"
+      LocalizationId: corrname_Subrule_ParentPid_Spoofing_Open

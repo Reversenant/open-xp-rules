@@ -1,4 +1,4 @@
 Description: 'Вспомогательное правило для обнаружения техники Parent PID Spoofing. Правило обнаруживает доступ к памяти 2х различных процессов от одного и того же процесса'
 EventDescriptions:
-    - LocalizationId: 'corrname_Subrule_ParentPid_Spoofing'
+    - LocalizationId: 'corrname_Subrule_ParentPid_Spoofing_Open'
       EventDescription: 'Процесс {subject.process.name} обратился к памяти 2х процессов {object.process.parent.name} и {object.process.name} на узле {event_src.host}'

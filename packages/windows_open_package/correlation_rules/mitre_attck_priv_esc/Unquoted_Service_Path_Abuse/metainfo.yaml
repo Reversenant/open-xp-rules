@@ -25,5 +25,5 @@ ContentRelations:
             persistence:
                 - T1574.009
 EventDescriptions:
-    - Criteria: correlation_name = "Unquoted_Service_Path_Abuse"
-      LocalizationId: corrname_Unquoted_Service_Path_Abuse
+    - Criteria: correlation_name = "Unquoted_Service_Path_Abuse_Open"
+      LocalizationId: corrname_Unquoted_Service_Path_Abuse_Open

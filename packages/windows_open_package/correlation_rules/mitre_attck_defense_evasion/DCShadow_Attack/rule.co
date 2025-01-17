@@ -9,7 +9,7 @@ event Computer_Account_Changed:
         regex(lower(subject.account.name), ".*\$$", 0) == null
     }
 
-rule DCShadow_Attack: Computer_Account_Changed
+rule DCShadow_Attack_Open: Computer_Account_Changed
 
     on Computer_Account_Changed {
         $subject.account.name = subject.account.name

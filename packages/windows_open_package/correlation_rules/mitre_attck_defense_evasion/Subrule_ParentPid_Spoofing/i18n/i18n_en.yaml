@@ -1,4 +1,4 @@
 Description: 'Auxiliary rule for detecting the Parent PID Spoofing technique. The rule detects access to the memory of 2 different processes from the same process'
 EventDescriptions:
-    - LocalizationId: 'corrname_Subrule_ParentPid_Spoofing'
+    - LocalizationId: 'corrname_Subrule_ParentPid_Spoofing_Open'
       EventDescription: 'The process {subject.process.name} accessed the memory of 2 processes {object.process.parent.name} and {object.process.name} on the node {event_src.host}'

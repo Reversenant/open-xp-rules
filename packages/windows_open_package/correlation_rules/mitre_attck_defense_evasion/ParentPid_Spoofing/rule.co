@@ -12,10 +12,10 @@ event Subrule_PPID_Spoofing:
     key:
         event_src.host, object.process.id, object.process.name, object.process.parent.id, object.process.parent.name
     filter {
-        correlation_name == "Subrule_ParentPid_Spoofing"
+        correlation_name == "Subrule_ParentPid_Spoofing_Open"
     }
 
-rule ParentPid_Spoofing: (Process_Start and Subrule_PPID_Spoofing) within 10s
+rule ParentPid_Spoofing_Open: (Process_Start and Subrule_PPID_Spoofing) within 10s
 
     on Process_Start {
         $subject.account.name = subject.account.name

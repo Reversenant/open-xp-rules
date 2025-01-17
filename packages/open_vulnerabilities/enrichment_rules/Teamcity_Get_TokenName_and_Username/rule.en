@@ -8,7 +8,7 @@ event Token_Request:
         and status == "success"        
     }
 
-enrichment Teamcity_Get_TokenName_and_Username
+enrichment Teamcity_Get_TokenName_and_Username_Open
     
     enrich Token_Request:
         enrich_fields {

@@ -25,7 +25,7 @@ event Download_Part_of_the_Payload:
         and regex(lower(object.process.cmdline), "/c echo \S+>>%{1,2}temp%{1,2}\S+\.b64", 0) != null
     }
 
-rule ProxyNotShell: NTLM_Authorizing_Compromised_Account and Download_Part_of_the_Payload+ timer 30s
+rule ProxyNotShell_Open: NTLM_Authorizing_Compromised_Account and Download_Part_of_the_Payload+ timer 30s
     init {
         $first_download_event = true
     }

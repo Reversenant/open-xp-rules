@@ -34,7 +34,7 @@ event Process_Start:
         )
     }
 
-rule CVE_2023_38831_WinRar: (Process_Start and File_Created?) timer 5s
+rule CVE_2023_38831_WinRar_Open: (Process_Start and File_Created?) timer 5s
 
     on File_Created {
         $subject.process.id = subject.process.id

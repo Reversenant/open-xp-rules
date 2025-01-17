@@ -8,7 +8,7 @@ event AccessProccess:
         and in_list(["0x1fffff", "0x1f3fff"], object.value)
     }
 
-rule Subrule_ParentPid_Spoofing: AccessProccess[2] with different object.process.id within 5s
+rule Subrule_ParentPid_Spoofing_Open: AccessProccess[2] with different object.process.id within 5s
     init {
         $first_event = true
     }

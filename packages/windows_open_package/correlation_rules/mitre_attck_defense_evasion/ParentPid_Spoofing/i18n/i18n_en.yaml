@@ -1,4 +1,4 @@
 Description: 'The rule detects the use of the Parent Pid Spoofing technique'
 EventDescriptions:
-    - LocalizationId: 'corrname_ParentPid_Spoofing'
+    - LocalizationId: 'corrname_ParentPid_Spoofing_Open'
       EventDescription: 'Process {subject.process.name} started process {object.process.name} using Parent Pid Spoofing technique from parent process {object.process.parent.name} on node {event_src.host}'

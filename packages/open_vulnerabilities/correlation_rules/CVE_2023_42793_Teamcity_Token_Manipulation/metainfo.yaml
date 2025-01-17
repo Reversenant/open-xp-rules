@@ -1,4 +1,4 @@
-ContentAutoName: CVE_2023_42793_Teamcity_Token_Manipulation
+ContentAutoName: CVE_2023_42793_Teamcity_Token_Manipulation_Open
 ExpertContext:
     Created: 27.09.2023
     Updated: 03.10.2023
@@ -25,11 +25,11 @@ ContentRelations:
             defense-evasion:
                 - T1134.003
 EventDescriptions:
-    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation" and object.account.name != null and subject.account.id = null
-      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation
-    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation" and object.account.id != null and subject.account.id = null
-      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_2
-    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation" and object.account.name != null and subject.account.id != null
-      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_3
-    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation" and object.account.id != null and subject.account.id != null
-      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_4
+    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation_Open" and object.account.name != null and subject.account.id = null
+      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_Open
+    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation_Open" and object.account.id != null and subject.account.id = null
+      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_Open_2
+    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation_Open" and object.account.name != null and subject.account.id != null
+      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_Open_3
+    - Criteria: correlation_name = "CVE_2023_42793_Teamcity_Token_Manipulation_Open" and object.account.id != null and subject.account.id != null
+      LocalizationId: corrname_CVE_2023_42793_Teamcity_Token_Manipulation_Open_4

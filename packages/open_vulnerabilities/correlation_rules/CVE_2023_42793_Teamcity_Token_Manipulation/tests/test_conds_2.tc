@@ -1,2 +1,2 @@
 # Тест на исключение с UserID и событием создания токена
-expect not {"correlation_name": "CVE_2023_42793_Teamcity_Token_Manipulation"}
+expect not {"correlation_name": "CVE_2023_42793_Teamcity_Token_Manipulation_Open"}

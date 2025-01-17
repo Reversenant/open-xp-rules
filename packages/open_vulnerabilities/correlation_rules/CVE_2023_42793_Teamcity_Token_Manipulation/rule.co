@@ -51,7 +51,7 @@ event Token_Created_Account_ID:
         and status == "success"
     }
 
-rule CVE_2023_42793_Teamcity_Token_Manipulation: ((Token_Request_Account_Name and Token_Created_Account_Name?) or (Token_Request_Account_ID and Token_Created_Account_ID?)) timer 1m
+rule CVE_2023_42793_Teamcity_Token_Manipulation_Open: ((Token_Request_Account_Name and Token_Created_Account_Name?) or (Token_Request_Account_ID and Token_Created_Account_ID?)) timer 1m
 
     on Token_Request_Account_Name {
         $subject.account.id = subject.account.id

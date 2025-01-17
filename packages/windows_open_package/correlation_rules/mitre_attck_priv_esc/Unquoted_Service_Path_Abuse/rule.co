@@ -15,7 +15,7 @@ event Process_Start:
          and object.process.parent.fullpath == "c:\\windows\\system32\\services.exe"
     }
 
-rule Unquoted_Service_Path_Abuse: Process_Start
+rule Unquoted_Service_Path_Abuse_Open: Process_Start
     on Process_Start {
         $subject.account.name = subject.account.name
         $subject.account.domain = subject.account.domain

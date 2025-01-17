@@ -1,4 +1,4 @@
 Description: 'Правило обнаруживает использование техники Parent Pid Spoofing'
 EventDescriptions:
-    - LocalizationId: 'corrname_ParentPid_Spoofing'
+    - LocalizationId: 'corrname_ParentPid_Spoofing_Open'
       EventDescription: 'Процесс {subject.process.name} запустил процесс {object.process.name}, используя технику Parent Pid Spoofing, от родительского процесса {object.process.parent.name} на узле {event_src.host}'

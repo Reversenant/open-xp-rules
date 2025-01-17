@@ -1,4 +1,4 @@
 Description: 'Exploitation of vulnerability CVE-2023-38831 in WinRAR'
 EventDescriptions:
-    - LocalizationId: 'corrname_CVE_2023_38831_WinRar'
+    - LocalizationId: 'corrname_CVE_2023_38831_WinRar_Open'
       EventDescription: 'Vulnerability {detect} in WinRAR was exploited by user {subject.account.name} on host {event_src.host}'

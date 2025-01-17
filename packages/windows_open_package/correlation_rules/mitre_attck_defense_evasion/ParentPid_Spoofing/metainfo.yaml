@@ -1,5 +1,5 @@
 ObjectId: SEC-CR-706374286
-ContentAutoName: ParentPid_Spoofing
+ContentAutoName: ParentPid_Spoofing_Open
 ExpertContext:
     Created: 05.06.2023
     Updated: 05.06.2023
@@ -15,5 +15,5 @@ ContentRelations:
             defense-evasion:
                 - T1134.004
 EventDescriptions:
-    - Criteria: correlation_name = "ParentPid_Spoofing"
-      LocalizationId: corrname_ParentPid_Spoofing
+    - Criteria: correlation_name = "ParentPid_Spoofing_Open"
+      LocalizationId: corrname_ParentPid_Spoofing_Open

@@ -1,6 +1,6 @@
-Description: 'Уязвимость ProxyNotShell может быть использована атакующим для первоначального проникновения в инфраструктуру через уязвимые Exchange-сервера'
+Description: 'Уязвимость ProxyNotShell_Open может быть использована атакующим для первоначального проникновения в инфраструктуру через уязвимые Exchange-сервера'
 EventDescriptions:
-    - LocalizationId: 'corrname_ProxyNotShell'
-      EventDescription: 'Обнаружена эксплуатация уязвимости ProxyNotShell на узле {event_src.host} от пользователя {subject.account.name} c узла {src.ip}'
-    - LocalizationId: 'corrname_ProxyNotShell_2'
-      EventDescription: 'Обнаружена эксплуатация уязвимости ProxyNotShell на узле {event_src.host} от пользователя {subject.account.name} c узла {src.ip} ({src.host})'
+    - LocalizationId: 'corrname_ProxyNotShell_Open'
+      EventDescription: 'Обнаружена эксплуатация уязвимости ProxyNotShell_Open на узле {event_src.host} от пользователя {subject.account.name} c узла {src.ip}'
+    - LocalizationId: 'corrname_ProxyNotShell_Open_2'
+      EventDescription: 'Обнаружена эксплуатация уязвимости ProxyNotShell_Open на узле {event_src.host} от пользователя {subject.account.name} c узла {src.ip} ({src.host})'

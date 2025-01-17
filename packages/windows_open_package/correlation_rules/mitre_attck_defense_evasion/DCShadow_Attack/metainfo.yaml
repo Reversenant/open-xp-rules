@@ -1,5 +1,5 @@
 ObjectId: SEC-CR-202536688
-ContentAutoName: DCShadow_Attack
+ContentAutoName: DCShadow_Attack_Open
 ExpertContext:
     Created: 01.06.2023
     Updated: 02.06.2023
@@ -14,8 +14,8 @@ ExpertContext:
     KnowledgeHolders:
         - "@artemcun"
 EventDescriptions:
-    - Criteria: correlation_name = "DCShadow_Attack"
-      LocalizationId: corrname_DCShadow_Attack
+    - Criteria: correlation_name = "DCShadow_Attack_Open"
+      LocalizationId: corrname_DCShadow_Attack_Open
 ContentRelations:
     Implements:
         ATTACK:

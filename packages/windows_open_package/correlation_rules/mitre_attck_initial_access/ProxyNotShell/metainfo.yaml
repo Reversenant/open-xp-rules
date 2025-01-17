@@ -1,9 +1,9 @@
-ContentAutoName: ProxyNotShell
+ContentAutoName: ProxyNotShell_Open
 ExpertContext:
     Created: 17.05.2023
     Updated: 17.05.2023
     Usecases:
-        - Выявляет эксплуатирование ProxyNotShell из пакета Metasploit
+        - Выявляет эксплуатирование ProxyNotShell_Open из пакета Metasploit
     DataSources:
         - Provider: Microsoft-Windows-Security-Auditing
           EventID:
@@ -14,10 +14,10 @@ ExpertContext:
               - 1
 ObjectId: SEC-CR-655783268
 EventDescriptions:
-    - Criteria: correlation_name = "ProxyNotShell" and src.ip = src.host
-      LocalizationId: corrname_ProxyNotShell
-    - Criteria: correlation_name = "ProxyNotShell" and src.ip != src.host
-      LocalizationId: corrname_ProxyNotShell_2
+    - Criteria: correlation_name = "ProxyNotShell_Open" and src.ip = src.host
+      LocalizationId: corrname_ProxyNotShell_Open
+    - Criteria: correlation_name = "ProxyNotShell_Open" and src.ip != src.host
+      LocalizationId: corrname_ProxyNotShell_Open_2
 ContentRelations:
     Implements:
         ATTACK:
