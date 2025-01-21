@@ -1,4 +1,0 @@
-Description: 'Replace these words with a description of normalization'
-EventDescriptions:
-    - LocalizationId: '4794_Attempt_was_made_to_set_DSRM_admin_password_1'
-      EventDescription: 'Replace these words with a description. Example: The user {subject.account.name} started the {object.process.name} process on host {event_src.host}'

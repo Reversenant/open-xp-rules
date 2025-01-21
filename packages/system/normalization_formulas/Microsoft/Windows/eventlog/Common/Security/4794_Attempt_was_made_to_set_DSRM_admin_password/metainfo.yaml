@@ -1,7 +1,0 @@
-EventDescriptions:
-    - Criteria: id = "4794_Attempt_was_made_to_set_DSRM_admin_password"
-      LocalizationId: 4794_Attempt_was_made_to_set_DSRM_admin_password_1
-ObjectId: SEC-NF-115213330
-ExpertContext:
-    Created: 11.06.2023
-    Updated: 11.06.2023
