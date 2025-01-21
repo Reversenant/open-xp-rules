@@ -8,7 +8,7 @@
     "event_src.subsys": "Microsoft-Windows-Kernel-EventTracing/Analytic",
     "event_src.title": "Microsoft-Windows-Kernel-EventTracing",
     "event_src.vendor": "microsoft",
-    "id": "Microsoft_Windows_eventlog_Common_EventTracing_17_The security_descriptor_for_session_has_been_updated",
+    "id": "Microsoft_Windows_eventlog_Common_EventTracing_17_The_security_descriptor_for_session_has_been_updated",
     "importance": "info",
     "msgid": "17",
     "object": "logging",
