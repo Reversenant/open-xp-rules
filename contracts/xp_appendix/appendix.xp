@@ -1,0 +1,61 @@
+# Appendix to all XP formulas
+
+#
+# windows dash magic
+#
+
+if event_src.title == "windows" or event_src.title == "sysmon" or event_src.title == "sql_server" then
+    if event_src.fqdn == "-" then
+        event_src.fqdn = null
+    endif
+    
+    if event_src.hostname == "-" then
+        event_src.hostname = null
+    endif
+    
+    if src.fqdn == "-" then
+        src.fqdn = null
+    endif
+    
+    if src.hostname == "-" then
+        src.hostname = null
+    endif
+    
+    if dst.fqdn == "-" then
+        dst.fqdn = null
+    endif
+    
+    if dst.hostname == "-" then
+        dst.hostname = null
+    endif
+    
+    if event_src.subsys != "notifications" and event_src.fqdn == null and event_src.hostname != null then
+        event_src.fqdn = event_src.hostname
+    endif
+endif
+
+#
+# event_src.host magic
+#
+
+event_src.host = coalesce(event_src.fqdn, event_src.hostname, event_src.ip, recv_ipv4, recv_ipv6, recv_host)
+
+#
+# src/dst.host magic
+#
+src.host = coalesce(src.fqdn, src.hostname, src.ip, src.mac)
+dst.host = coalesce(dst.fqdn, dst.hostname, dst.ip, dst.mac)
+
+#
+# external src/dst.host magic
+#
+external_src.host = coalesce(external_src.fqdn, external_src.hostname, external_src.ip)
+external_dst.host = coalesce(external_dst.fqdn, external_dst.hostname, external_dst.ip)
+
+#
+# importance magic
+#
+
+if importance == null then
+        importance = "info"
+endif
