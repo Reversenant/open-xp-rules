@@ -41,10 +41,10 @@ jobs:
     - name: Check normalization formulas
       run: |
         mkdir -p ${{ env.TEMP_DIR }}
-        mkdir -p ${{ env.RUNNER_HOME }}/contracts
+        mkdir -p /home/runner/contracts
         cp -r /home/runner/xp-kbt/knowledgebase/contracts/taxonomy $GITHUB_WORKSPACE/contracts
-        cp -r /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix ${{ env.RUNNER_HOME }}/contracts
-        ${{ env.KBT_DIR }}/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --sdk /home/runner/xp-kbt/xp-sdk --xp-appendix ${{ env.RUNNER_HOME }}/contracts/appendix.xp --temp=${{ env.TEMP_DIR }} $GITHUB_WORKSPACE --less
+        cp -r /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix /home/runner/test
+        ${{ env.KBT_DIR }}/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --sdk /home/runner/xp-kbt/xp-sdk --xp-appendix /home/runner/test/appendix.xp --temp=${{ env.TEMP_DIR }} $GITHUB_WORKSPACE --less
 
     - name: Package Open
       run: |
