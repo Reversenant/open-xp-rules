@@ -43,7 +43,7 @@ jobs:
         mkdir -p ${{ env.TEMP_DIR }}
         mkdir -p /home/runner/testf
         cp -r /home/runner/xp-kbt/knowledgebase/contracts/taxonomy $GITHUB_WORKSPACE/contracts
-        cp /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix home/runner/testf
+        cp -r /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix home/runner/testf
         ls -a home/runner/testf
         /home/runner/xp-kbt/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --sdk /home/runner/xp-kbt/xp-sdk --xp-appendix home/runner/testf/appendix.xp --temp=/home/runner/temp/eXtractionAndProcessing/output/packages $GITHUB_WORKSPACE --less
 
