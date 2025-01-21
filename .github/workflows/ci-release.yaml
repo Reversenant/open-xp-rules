@@ -43,7 +43,7 @@ jobs:
         mkdir -p ${{ env.TEMP_DIR }}
         cp -r /home/runner/xp-kbt/knowledgebase/contracts/taxonomy $GITHUB_WORKSPACE/contracts
         cp -r /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix $GITHUB_WORKSPACE/contracts
-        ${{ env.KBT_DIR }}/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --sdk ptsiem-sdk --xp-appendix /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix/appendix.xp --temp=temp ${{ env.TEMP_DIR }} --less
+        ${{ env.KBT_DIR }}/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --xp-appendix /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix/appendix.xp --temp=temp ${{ env.TEMP_DIR }} --less
 
     - name: Package Open
       run: |
