@@ -1,7 +1,9 @@
 name: Release Current Version
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - v*
 
 env:
   KBT_VERSION: 27.0.78
@@ -38,17 +40,10 @@ jobs:
         mkdir -p ${{ env.KBT_DIR }}
         tar -xzvf ${{ env.KBT_ARCHIVE }} -C ${{ env.KBT_DIR }}
 
-    - name: Check normalization formulas
-      run: |
-        mkdir -p ${{ env.TEMP_DIR }}
-        mkdir -p /home/runner/testf
-        cp -r /home/runner/xp-kbt/knowledgebase/contracts/taxonomy $GITHUB_WORKSPACE/contracts
-        cp -r /home/runner/xp-kbt/knowledgebase/contracts/xp_appendix /home/runner/testf
-        ls -a /home/runner/testf/xp_appendix
-        /home/runner/xp-kbt/build-tools/formulas_tests --taxonomy=$GITHUB_WORKSPACE/contracts/taxonomy/taxonomy.json --sdk /home/runner/xp-kbt/xp-sdk --xp-appendix /home/runner/testf/xp_appendix/appendix.xp --temp=/home/runner/temp/eXtractionAndProcessing/output/packages $GITHUB_WORKSPACE --less
-
     - name: Package Open
       run: |
+        mkdir -p ${{ env.TEMP_DIR }}
+        cp -r /home/runner/xp-kbt/knowledgebase/contracts/taxonomy $GITHUB_WORKSPACE/contracts
         chmod +x ./.github/scripts/filter_open_content.sh
         ./.github/scripts/filter_open_content.sh $GITHUB_WORKSPACE
         OPEN_PACKAGE_NAME="pack.open.${{ env.KBT_VERSION }}.kb"
