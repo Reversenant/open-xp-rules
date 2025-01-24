@@ -1,4 +1,0 @@
-Description: 'Злоумышленники могут закрепить или повысить привилегии, выполняя вредоносный код, запускаемый подпиской на события Windows Management Instrumentation (WMI).'
-EventDescriptions:
-    - LocalizationId: 'corrname_Change_wmi_subscription'
-      EventDescription: 'На {event_src.host} изменен список WMI подписок. {alert.context}'

@@ -1,4 +1,0 @@
-Description: 'Adversaries may establish persistence and elevate privileges by executing malicious content triggered by a Windows Management Instrumentation (WMI) event subscription.'
-EventDescriptions:
-    - LocalizationId: 'corrname_Change_wmi_subscription'
-      EventDescription: 'The list of WMI subscriptions has been changed to {event_src.host}. {alert.context}'

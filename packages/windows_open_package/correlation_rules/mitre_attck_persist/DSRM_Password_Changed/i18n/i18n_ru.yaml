@@ -1,6 +1,0 @@
-Description: 'Правило выявляет попытку изменения пароля администратора DSRM'
-EventDescriptions:
-    - LocalizationId: 'corrname_DSRM_Password_Changed'
-      EventDescription: 'На узле {event_src.host} была предпринята успешная попытка смены пароля администратора DSRM'
-    - LocalizationId: 'corrname_DSRM_Password_Changed_2'
-      EventDescription: 'На узле {event_src.host} была предпринята неудачная попытка смены пароля администратора DSRM'

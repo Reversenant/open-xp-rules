@@ -1,6 +1,0 @@
-Description: 'This rule is designed to detect an attempt to change DSRM administrator password'
-EventDescriptions:
-    - LocalizationId: 'corrname_DSRM_Password_Changed'
-      EventDescription: 'A successfully attempt to change DSRM administrator password has been made on {event_src.host}'
-    - LocalizationId: 'corrname_DSRM_Password_Changed_2'
-      EventDescription: 'A unsuccessfully attempt to change DSRM administrator password has been made on {event_src.host}'
