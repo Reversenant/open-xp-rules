@@ -36,6 +36,20 @@ jobs:
         mkdir -p ${{ env.KBT_DIR }}
         tar -xzvf ${{ env.KBT_ARCHIVE }} -C ${{ env.KBT_DIR }}
 
+    - name: Run modular tests
+      run: |
+        mkdir -p ${{ env.TEMP_DIR }}
+        ${{ env.KBT_DIR }}/build-tools/ecatest \
+          --sdk ${{ env.KBT_DIR }}/xp-sdk \
+          --taxonomy ${{ env.KBT_DIR }}/knowledgebase/contracts/taxonomy/taxonomy.json \
+          --temp ${{ env.TEMP_DIR }} \
+          -s $GITHUB_WORKSPACE/packages/windows_open_package/correlation_rules/mitre_attck_comm_and_ctrl/RDP_Tunneling/rule.co \
+          -c $GITHUB_WORKSPACE/packages/windows_open_package/correlation_rules/mitre_attck_comm_and_ctrl/RDP_Tunneling/tests/test_1.sc \
+          --schema ${{ env.TEMP_DIR }}/schema.json \
+          --fpta-defaults ${{ env.TEMP_DIR }}/correlation_defaults.json \
+          --rules-filters $GITHUB_WORKSPACE/common/rules_filters
+  
+
     - name: Run tests
       run: |
         mkdir -p ${{ env.TEMP_DIR }}
