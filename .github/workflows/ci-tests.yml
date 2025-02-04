@@ -36,6 +36,7 @@ jobs:
     - name: Run modular tests
       run: |
         mkdir -p ${{ env.TEMP_DIR }}
+        touch ${{ env.TEMP_DIR }}/schema.json
         ${{ env.KBT_DIR }}/build-tools/ecatest \
           --sdk ${{ env.KBT_DIR }}/xp-sdk \
           --taxonomy ${{ env.KBT_DIR }}/knowledgebase/contracts/taxonomy/taxonomy.json \
