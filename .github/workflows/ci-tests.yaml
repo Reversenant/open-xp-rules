@@ -48,7 +48,6 @@ jobs:
           --schema ${{ env.TEMP_DIR }}/schema.json \
           --fpta-defaults ${{ env.TEMP_DIR }}/correlation_defaults.json \
           --rules-filters $GITHUB_WORKSPACE/common/rules_filters
-  
 
     - name: Run tests
       run: |
